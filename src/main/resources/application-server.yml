@@ -1,0 +1,37 @@
+server:
+  # 端口号
+  port: 80
+  context-path: /histool
+imageDir: /usr/workspace/hishelp_imgs
+spring:
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,\
+      classpath:/static/,classpath:/public/,file:${imageDir}
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://35.241.126.125:3306/hishelp
+    username: zhangyanfu
+    password: 1105564Zyf!
+  # spring data jpa配置
+  jpa:
+    hibernate:
+      # 实体类有更新时，数据库表更新
+      ddl-auto: update
+    show-sql: true
+    format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  http:
+    # 过滤字符编码
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+logging:
+  config: classpath:logback.xml

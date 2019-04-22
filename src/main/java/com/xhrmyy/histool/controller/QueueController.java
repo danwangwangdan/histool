@@ -2,6 +2,9 @@ package com.xhrmyy.histool.controller;
 
 
 import com.xhrmyy.histool.common.BaseResult;
+import com.xhrmyy.histool.service.QueueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,9 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/queue")
 public class QueueController {
 
-    @RequestMapping("/list")
-    private BaseResult getQueueList(@RequestParam String office,@RequestParam String room, @RequestParam String ca){
+    @Autowired
+    private QueueService queueService;
 
-        return new BaseResult();
+    @RequestMapping("/list")
+    private BaseResult getQueueList(@RequestParam String office, @RequestParam String room, @RequestParam String ca) {
+
+
+        return queueService.getQueueList(office, room);
     }
 }

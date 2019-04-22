@@ -1,6 +1,6 @@
 server:
   # 端口号
-  port: 80
+  port: 8090
   context-path: /histool
 imageDir: /usr/workspace/hishelp_imgs
 spring:
@@ -15,6 +15,11 @@ spring:
     url: jdbc:mysql://35.241.126.125:3306/hishelp
     username: zhangyanfu
     password: 1105564Zyf!
+#  datasource:
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@172.16.10.99:1521:orcl
+#    username: zlhis
+#    password: HISI39
   # spring data jpa配置
   jpa:
     hibernate:

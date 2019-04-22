@@ -33,6 +33,8 @@ public class QueueInfo extends BaseModel {
     private Date callTime;
     @Column(name = "officeId")
     private Integer officeId;
+    @Column(name = "office")
+    private String office;
 
 
     public String getRoom() {
@@ -91,4 +93,11 @@ public class QueueInfo extends BaseModel {
         this.officeId = officeId;
     }
 
+    public String getOffice() {
+        return office;
+    }
+
+    public void setOffice(String office) {
+        this.office = office;
+    }
 }

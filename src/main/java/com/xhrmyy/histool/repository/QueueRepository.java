@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface QueueRepository extends JpaRepository<QueueInfo, Long> {
 
-    List<QueueInfo> findByOfficeIdAndRoomAndQueueTimeBetween(Integer officeId, String room, Date startTime, Date endTime, Sort sort);
+    List<QueueInfo> findByOfficeAndRoomAndStatusAndCallTime(String office, String room, int status, Date callTime, Sort sort);
 
 
 }

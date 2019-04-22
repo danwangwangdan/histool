@@ -3,6 +3,9 @@ server:
   port: 8090
   context-path: /histool
 imageDir: /usr/workspace/hishelp_imgs
+jasypt:
+  encryptor:
+    password: wlzx
 spring:
   mvc:
     static-path-pattern: /**
@@ -18,8 +21,8 @@ spring:
 #  datasource:
 #    driver-class-name: oracle.jdbc.driver.OracleDriver
 #    url: jdbc:oracle:thin:@172.16.10.99:1521:orcl
-#    username: zlhis
-#    password: HISI39
+#    username: pdjh     ENC(zxQgk2h9ftlKsmpdU9mGjA==)
+#    password: hsm1995  ENC(j+LyKbfM+rvC2WUMY+h3rg==)
   # spring data jpa配置
   jpa:
     hibernate:

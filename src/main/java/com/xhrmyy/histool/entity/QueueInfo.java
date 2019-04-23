@@ -13,27 +13,16 @@ import java.util.Date;
  * @Author HuangShiming
  * @Date 2019-4-21
  */
-@Entity
-@Table(name = "v_queue_info")
 public class QueueInfo extends BaseModel {
 
     private static final long serialVersionUID = 325141355507080613L;
-    @Id
-    @Column(name = "room")
     private String room;
-    @Column(name = "patientName")
     private String patientName;
-    @Column(name = "status")
     private Integer status;
-    @Column(name = "sn")
     private Long sn;
-    @Column(name = "queueTime")
     private Date queueTime;
-    @Column(name = "callTime")
     private Date callTime;
-    @Column(name = "officeId")
     private Integer officeId;
-    @Column(name = "office")
     private String office;
 
 

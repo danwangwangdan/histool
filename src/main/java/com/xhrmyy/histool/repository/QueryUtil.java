@@ -7,14 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class QueryUtil {
@@ -26,7 +21,7 @@ public class QueryUtil {
 
     public List<QueueInfo> getQueueInfo(String office, String room){
 
-        String sql  ="select * from sys.view_queue_info where status = 0 and callTime is null and office=? and room=? order by sn asc";
+        String sql  ="select * from sys.view_queue_info where status = 0 and callTime is null and office=? and room=?";
 //        PreparedStatement preparedStatement = null;
 //        List<QueueInfo> queueInfoList= new ArrayList<>();
 //        try {
@@ -52,10 +47,10 @@ public class QueryUtil {
         return jdbcTemplate.query(sql, new Object[]{office, room}, new BeanPropertyRowMapper<>(QueueInfo.class));
     }
 
-    public Date getLatestTime(String office, String room) {
+    public Timestamp getLatestTime(String office, String room) {
 
-        String sql  ="select max(callTime) callTime from sys.view_queue_info where office=? and room=?";
-        return jdbcTemplate.queryForObject(sql,new Object[]{office, room}, java.sql.Date.class);
+        String sql = "select max(callTime) callTime from sys.view_queue_info where office=? and room=?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{office, room}, Timestamp.class);
 //
 //        PreparedStatement preparedStatement = null;
 //        Date maxCallTime = null;

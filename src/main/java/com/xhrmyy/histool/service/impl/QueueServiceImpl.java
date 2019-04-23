@@ -4,12 +4,12 @@ import com.xhrmyy.histool.common.BaseResult;
 import com.xhrmyy.histool.entity.QueueInfo;
 import com.xhrmyy.histool.model.QueueResult;
 import com.xhrmyy.histool.repository.QueryUtil;
-import com.xhrmyy.histool.repository.QueueRepository;
 import com.xhrmyy.histool.service.QueueService;
+import org.apache.commons.net.ntp.TimeStamp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +30,9 @@ public class QueueServiceImpl implements QueueService {
             List<QueueInfo> crudeInfo = queueUtil.getQueueInfo(office, room);
             SimpleDateFormat dd = new SimpleDateFormat("HH:mm");
             // 获取最新的叫号时间
-            Date latestCallTime = queueUtil.getLatestTime(office, room);
+            Timestamp timeStamp = queueUtil.getLatestTime(office, room);
+            Date latestCallTime = new Date();
+            latestCallTime.setTime(timeStamp.getTime());
             // 设置每个叫号房间的人均等待时长，单位：分钟
             int perWaitLength = 0;
             if (office.equals("B超室")) {
@@ -66,16 +68,16 @@ public class QueueServiceImpl implements QueueService {
             } else if (office.equals("CT室")) {
                 perWaitLength = 20;
             }
-            // 获取第一个人的排队序号
-            Long firstSn = crudeInfo.get(0).getSn();
+            //// 获取第一个人的排队序号
+            //Long firstSn = crudeInfo.get(0).getSn();
             // 处理数据
             List<QueueResult> queueResultList = new ArrayList<>();
-            for (QueueInfo queueInfo : crudeInfo) {
+            for (int i = 0;i<crudeInfo.size();i++) {
                 QueueResult queueResult = new QueueResult();
-                queueResult.setName(queueInfo.getPatientName());
-                queueResult.setSn(queueInfo.getSn());
-                queueResult.setFrontNo(Long.valueOf(queueInfo.getSn() - firstSn).intValue());
-                queueResult.setEsTime(dd.format(new Date(perWaitLength * queueResult.getFrontNo() * 60 * 1000L + latestCallTime.getTime())));
+                queueResult.setName(crudeInfo.get(i).getPatientName());
+                queueResult.setSn(crudeInfo.get(i).getSn());
+                queueResult.setFrontNo(i);
+                queueResult.setEsTime(dd.format(new Date(perWaitLength * (queueResult.getFrontNo()+1) * 60 * 1000L + latestCallTime.getTime())));
                 queueResultList.add(queueResult);
             }
             baseResult.setData(queueResultList);

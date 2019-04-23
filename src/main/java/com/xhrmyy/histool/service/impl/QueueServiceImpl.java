@@ -6,6 +6,8 @@ import com.xhrmyy.histool.model.QueueResult;
 import com.xhrmyy.histool.repository.QueryUtil;
 import com.xhrmyy.histool.service.QueueService;
 import org.apache.commons.net.ntp.TimeStamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class QueueServiceImpl implements QueueService {
 
     @Autowired
     private QueryUtil queueUtil;
+    private static final Logger log = LoggerFactory.getLogger(QueueServiceImpl.class);
 
     @Override
     public BaseResult getQueueList(String office, String room) {
@@ -30,9 +33,14 @@ public class QueueServiceImpl implements QueueService {
             List<QueueInfo> crudeInfo = queueUtil.getQueueInfo(office, room);
             SimpleDateFormat dd = new SimpleDateFormat("HH:mm");
             // 获取最新的叫号时间
-            Timestamp timeStamp = queueUtil.getLatestTime(office, room);
             Date latestCallTime = new Date();
-            latestCallTime.setTime(timeStamp.getTime());
+            try {
+                Timestamp timeStamp = queueUtil.getLatestTime(office, room);
+                latestCallTime.setTime(timeStamp.getTime());
+            }catch (NullPointerException e){
+                baseResult.setData(new ArrayList<>());
+                return baseResult;
+            }
             // 设置每个叫号房间的人均等待时长，单位：分钟
             int perWaitLength = 0;
             if (office.equals("B超室")) {
@@ -82,9 +90,10 @@ public class QueueServiceImpl implements QueueService {
             }
             baseResult.setData(queueResultList);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.toString());
             baseResult.setCode(-500);
             baseResult.setMessage("服务器异常");
+            return baseResult;
         }
         return baseResult;
     }

@@ -32,15 +32,6 @@ public class QueueServiceImpl implements QueueService {
             // 获取未处理的排队数据
             List<QueueInfo> crudeInfo = queueUtil.getQueueInfo(office, room);
             SimpleDateFormat dd = new SimpleDateFormat("HH:mm");
-            // 获取最新的叫号时间
-            Date latestCallTime = new Date();
-            try {
-                Timestamp timeStamp = queueUtil.getLatestTime(office, room);
-                latestCallTime.setTime(timeStamp.getTime());
-            }catch (NullPointerException e){
-                baseResult.setData(new ArrayList<>());
-                return baseResult;
-            }
             // 设置每个叫号房间的人均等待时长，单位：分钟
             int perWaitLength = 0;
             if (office.equals("B超室")) {
@@ -55,16 +46,14 @@ public class QueueServiceImpl implements QueueService {
                 } else {
                     perWaitLength = 20;
                 }
-            } else if (office.equals("胃镜室")) {
+            } else if (office.equals("内窥镜室")) {
                 if (room.equals("普通胃镜")) {
                     perWaitLength = 30;
                 } else if (room.equals("无痛胃镜")) {
                     perWaitLength = 20;
                 } else if (room.equals("电子肠镜")) {
                     perWaitLength = 45;
-                } else if (room.equals("4号窗口")) {
-                    perWaitLength = 20;
-                } else {
+                }else {
                     perWaitLength = 20;
                 }
             } else if (office.equals("心电图室")) {
@@ -85,7 +74,7 @@ public class QueueServiceImpl implements QueueService {
                 queueResult.setName(crudeInfo.get(i).getPatientName());
                 queueResult.setSn(crudeInfo.get(i).getSn());
                 queueResult.setFrontNo(i);
-                queueResult.setEsTime(dd.format(new Date(perWaitLength * (queueResult.getFrontNo()+1) * 60 * 1000L + latestCallTime.getTime())));
+                queueResult.setEsTime(String.valueOf(perWaitLength * (queueResult.getFrontNo()+1)));
                 queueResultList.add(queueResult);
             }
             baseResult.setData(queueResultList);

@@ -32,6 +32,11 @@ public class QueueServiceImpl implements QueueService {
             // 获取未处理的排队数据
             List<QueueInfo> crudeInfo = queueUtil.getQueueInfo(office, room);
             SimpleDateFormat dd = new SimpleDateFormat("HH:mm");
+            // 获取最新的叫号时间
+            Timestamp timeStamp = queueUtil.getLatestTime(office, room);
+            Date latestCallTime = new Date();
+            latestCallTime.setTime(timeStamp.getTime());
+            long diffMin = (new Date().getTime() - latestCallTime.getTime())/(1000 * 60);
             // 设置每个叫号房间的人均等待时长，单位：分钟
             int perWaitLength = 0;
             if (office.equals("B超室")) {
@@ -74,7 +79,7 @@ public class QueueServiceImpl implements QueueService {
                 queueResult.setName(crudeInfo.get(i).getPatientName());
                 queueResult.setSn(crudeInfo.get(i).getSn());
                 queueResult.setFrontNo(i);
-                queueResult.setEsTime(String.valueOf(perWaitLength * (queueResult.getFrontNo()+1)));
+                queueResult.setEsTime(String.valueOf(perWaitLength * (queueResult.getFrontNo()+1)-diffMin));
                 queueResultList.add(queueResult);
             }
             baseResult.setData(queueResultList);

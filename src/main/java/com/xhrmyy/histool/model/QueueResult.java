@@ -6,6 +6,8 @@ public class QueueResult extends BaseModel {
 
     private static final long serialVersionUID = -1898027765943284612L;
     public static final int STATUS_WAITING = 2;
+
+    private Long id;
     /**
      * 排队序号
      */
@@ -51,5 +53,13 @@ public class QueueResult extends BaseModel {
 
     public void setFrontNo(Integer frontNo) {
         this.frontNo = frontNo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

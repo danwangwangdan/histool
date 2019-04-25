@@ -76,10 +76,11 @@ public class QueueServiceImpl implements QueueService {
             List<QueueResult> queueResultList = new ArrayList<>();
             for (int i = 0;i<crudeInfo.size();i++) {
                 QueueResult queueResult = new QueueResult();
+                queueResult.setId(crudeInfo.get(i).getSn());
                 queueResult.setName(crudeInfo.get(i).getPatientName());
                 queueResult.setSn(crudeInfo.get(i).getSn());
                 queueResult.setFrontNo(i);
-                queueResult.setEsTime("");
+                queueResult.setEsTime(dd.format(crudeInfo.get(i).getQueueTime()));
                 queueResultList.add(queueResult);
             }
             baseResult.setData(queueResultList);

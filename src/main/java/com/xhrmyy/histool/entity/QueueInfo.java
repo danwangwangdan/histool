@@ -18,6 +18,7 @@ public class QueueInfo extends BaseModel {
     private static final long serialVersionUID = 325141355507080613L;
     private String room;
     private String patientName;
+    private Long patientId;
     private Integer status;
     private Long sn;
     private Date queueTime;
@@ -88,5 +89,13 @@ public class QueueInfo extends BaseModel {
 
     public void setOffice(String office) {
         this.office = office;
+    }
+
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 }

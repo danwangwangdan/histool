@@ -10,11 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service("queueService")
@@ -23,6 +20,16 @@ public class QueueServiceImpl implements QueueService {
     @Autowired
     private QueryUtil queueUtil;
     private static final Logger log = LoggerFactory.getLogger(QueueServiceImpl.class);
+
+    @Override
+    public BaseResult toNotify(Long pid) {
+
+
+
+
+        return null;
+    }
+
 
     @Override
     public BaseResult getQueueList(String office, String room) {
@@ -80,7 +87,7 @@ public class QueueServiceImpl implements QueueService {
                 queueResult.setName(crudeInfo.get(i).getPatientName());
                 queueResult.setSn(crudeInfo.get(i).getSn());
                 queueResult.setFrontNo(i);
-                queueResult.setEsTime(dd.format(crudeInfo.get(i).getQueueTime()));
+                queueResult.setEsTime("入队时间："+dd.format(crudeInfo.get(i).getQueueTime()));
                 queueResultList.add(queueResult);
             }
             baseResult.setData(queueResultList);
@@ -92,4 +99,5 @@ public class QueueServiceImpl implements QueueService {
         }
         return baseResult;
     }
+
 }

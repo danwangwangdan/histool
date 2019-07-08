@@ -3,9 +3,9 @@ server:
   port: 8090
   context-path: /histool
 imageDir: /usr/workspace/hishelp_imgs
-#jasypt:
-#  encryptor:
-#    password: wlzx
+jasypt:
+  encryptor:
+    password: wlzx201809
 spring:
   mvc:
     static-path-pattern: /**
@@ -13,24 +13,19 @@ spring:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,\
       classpath:/static/,classpath:/public/,file:${imageDir}
   # 数据源配置
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://35.241.126.125:3306/hishelp
-#    username: zhangyanfu ENC(zxQgk2h9ftlKsmpdU9mGjA==)
-#    password: 1105564Zyf! ENC(j+LyKbfM+rvC2WUMY+h3rg==)
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@172.16.10.99:1521:orcl
-    username: pdjh
-    password: wlzx520
+    username: ENC(YWxRaqiCTVGNCCOcPLHRPw==)
+    password: ENC(ZIwhlsA0pqC/cy0M3rlhlg==)
   # spring data jpa配置
-#  jpa:
-#    hibernate:
-#      # 实体类有更新时，数据库表更新
-#      ddl-auto: update
-#    show-sql: true
-#    format_sql: true
-#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  #  jpa:
+  #    hibernate:
+  #      # 实体类有更新时，数据库表更新
+  #      ddl-auto: update
+  #    show-sql: true
+  #    format_sql: true
+  #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   http:
     # 过滤字符编码
     encoding:

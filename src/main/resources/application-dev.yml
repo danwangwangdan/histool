@@ -1,8 +1,10 @@
 server:
   # 端口号
-  port: 80
+  port: 8099
   context-path: /histool
-imageDir: D:/IMG/
+jasypt:
+  encryptor:
+    password: wlzx201809
 spring:
   mvc:
     static-path-pattern: /**
@@ -11,18 +13,18 @@ spring:
       classpath:/static/,classpath:/public/,file:${imageDir}
   # 数据源配置
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hishelp
-    username: root
-    password: 525153
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@172.16.10.99:1521:orcl
+    username: ENC(YWxRaqiCTVGNCCOcPLHRPw==)
+    password: ENC(ZIwhlsA0pqC/cy0M3rlhlg==)
   # spring data jpa配置
-  jpa:
-    hibernate:
-      # 实体类有更新时，数据库表更新
-      ddl-auto: update
-    show-sql: true
-    format_sql: true
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  #  jpa:
+  #    hibernate:
+  #      # 实体类有更新时，数据库表更新
+  #      ddl-auto: update
+  #    show-sql: true
+  #    format_sql: true
+  #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   http:
     # 过滤字符编码
     encoding:

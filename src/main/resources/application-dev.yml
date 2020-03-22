@@ -1,10 +1,10 @@
 server:
   # 端口号
-  port: 8099
+  port: 6081
   context-path: /histool
-jasypt:
-  encryptor:
-    password: wlzx201809
+#jasypt:
+#  encryptor:
+#    password: wlzx201809
 spring:
   mvc:
     static-path-pattern: /**
@@ -15,8 +15,8 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@172.16.10.99:1521:orcl
-    username: ENC(YWxRaqiCTVGNCCOcPLHRPw==)
-    password: ENC(ZIwhlsA0pqC/cy0M3rlhlg==)
+    username: PDJH
+    password: wlzx520
   # spring data jpa配置
   #  jpa:
   #    hibernate:

@@ -21,7 +21,7 @@ public class QueryUtil {
 
     public List<QueueInfo> getQueueInfo(String office, String room){
 
-        String sql  ="select * from sys.view_queue_info where status = 0 and callTime is null and office=? and room=? order by sn asc";
+        String sql  ="select * from sys.view_queue_info where status = 0 and office=? and room=? order by sn asc";
 //        PreparedStatement preparedStatement = null;
 //        List<QueueInfo> queueInfoList= new ArrayList<>();
 //        try {
